@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const API = axios.create({
-  baseURL: "https://digital-calendar-backend-1.onrender.com/"
+  baseURL: "https://digital-calendar-backend-1.onrender.com"
 })
 
 export const getEvents = () => API.get("/events")
