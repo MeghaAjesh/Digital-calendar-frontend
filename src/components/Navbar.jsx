@@ -7,7 +7,7 @@ export default function Navbar() {
 
   const links = [
     { href: "/",         label: "Home",     icon: "🏠" },
-    { href: "/calendar", label: "Calendar", icon: "🗓" },
+    { href: "/events", label: "Calendar", icon: "🗓" },
   ]
 
   return (
