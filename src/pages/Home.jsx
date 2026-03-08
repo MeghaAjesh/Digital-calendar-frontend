@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { getEvents } from "../services/api"
+import { getEvents, deleteEvent } from "../services/api"
 import EventCard from "../components/EventCard"
 import EventForm from "../components/EventForm"
 import Navbar from "../components/Navbar"
