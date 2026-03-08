@@ -29,6 +29,7 @@ function getDaysUntil(dateStr) {
 }
 
 export default function EventCard({ event, onDelete, onEdit }) {
+  const role = localStorage.getItem("role")
   const [hovered, setHovered] = useState(false)
   const cat   = CATEGORY_STYLES[event.category] || CATEGORY_STYLES.other
   const badge = getDaysUntil(event.date)
@@ -166,12 +167,17 @@ export default function EventCard({ event, onDelete, onEdit }) {
               style={iconBtnStyle("#d4af37")}
             >✏️</button>
           )}
-          {onDelete && (
-            <button
-              onClick={(e) => { e.stopPropagation(); onDelete(event.id) }}
-              style={iconBtnStyle("#ef4444")}
-            >🗑</button>
-          )}
+          {role === "ADMIN" && onDelete && (
+  <button
+    onClick={(e) => { 
+      e.stopPropagation(); 
+      onDelete(event.id) 
+    }}
+    style={iconBtnStyle("#ef4444")}
+  >
+    🗑
+  </button>
+)}
         </motion.div>
       </div>
     </motion.div>
