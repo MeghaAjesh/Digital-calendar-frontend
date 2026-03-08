@@ -53,6 +53,14 @@ export default function Home() {
     Object.keys(CAT_META).reduce((a, k) => ({ ...a, [k]: events.filter(e => e.category === k).length }), {})
   , [events])
 
+  const handleDelete = async (id) => {
+  try {
+    await deleteEvent(id)       // delete from backend
+    setEvents(prev => prev.filter(e => e.id !== id)) // update UI
+  } catch (err) {
+    alert("Failed to delete event")
+  }
+}
   return (
     <div style={{ minHeight: "100vh", background: "#0b1120", color: "#e2e8f0", fontFamily: "'Inter', sans-serif" }}>
       <Navbar />
