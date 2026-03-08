@@ -219,7 +219,7 @@ export default function Home() {
                   <motion.div key={event.id}
                     initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, scale:0.95 }}
                     transition={{ delay:i*0.04, duration:0.32 }}>
-                    <EventCard event={event} onDelete={id => setEvents(prev => prev.filter(e=>e.id!==id))} />
+                    <EventCard event={event} onDelete={handleDelete} />
                   </motion.div>
                 ))}
               </AnimatePresence>
