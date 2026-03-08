@@ -1,10 +1,17 @@
 import { motion } from "framer-motion"
 import { useState } from "react"
-
+import { useNavigate } from "react-router-dom"
 export default function Navbar() {
+  const navigate = useNavigate()
+   const role = localStorage.getItem("role")
   const current = window.location.pathname
   const [hoveredLink, setHoveredLink] = useState(null)
 
+const handleLogout = () => {
+  localStorage.removeItem("role")
+  localStorage.removeItem("token") // if you store JWT later
+  navigate("/login")
+}
   const links = [
     { href: "/",         label: "Home",     icon: "🏠" },
     { href: "/calendar", label: "Calendar", icon: "🗓" },
@@ -105,24 +112,45 @@ export default function Navbar() {
         })}
 
         {/* CTA Button */}
-        <motion.a
-          href="/"
-          whileHover={{ scale: 1.05, filter: "brightness(1.15)" }}
-          whileTap={{ scale: 0.96 }}
-          style={{
-            marginLeft: 8,
-            padding: "8px 18px",
-            borderRadius: 10,
-            background: "linear-gradient(135deg, #d4af37, #b8962e)",
-            color: "#0a0e1a",
-            fontWeight: 700,
-            fontSize: 13,
-            textDecoration: "none",
-            boxShadow: "0 4px 18px rgba(212,175,55,0.25)",
-          }}
-        >
-          + Add Event
-        </motion.a>
+{role === "ADMIN" && (
+<motion.a
+  href="/"
+  whileHover={{ scale: 1.05, filter: "brightness(1.15)" }}
+  whileTap={{ scale: 0.96 }}
+  style={{
+    marginLeft: 8,
+    padding: "8px 18px",
+    borderRadius: 10,
+    background: "linear-gradient(135deg, #d4af37, #b8962e)",
+    color: "#0a0e1a",
+    fontWeight: 700,
+    fontSize: 13,
+    textDecoration: "none",
+    boxShadow: "0 4px 18px rgba(212,175,55,0.25)",
+  }}
+>
+  + Add Event
+</motion.a>
+
+)}
+<motion.button
+  onClick={handleLogout}
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.96 }}
+  style={{
+    marginLeft: 8,
+    padding: "8px 18px",
+    borderRadius: 10,
+    background: "#ef4444",
+    color: "white",
+    fontWeight: 700,
+    fontSize: 13,
+    border: "none",
+    cursor: "pointer",
+  }}
+>
+  Logout
+</motion.button>
       </div>
     </motion.nav>
   )

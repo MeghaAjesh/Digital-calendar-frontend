@@ -24,6 +24,8 @@ const CAT_META = {
 }
 
 export default function Home() {
+  const role = localStorage.getItem("role")
+
   const [events, setEvents]   = useState([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter]   = useState("all")
@@ -104,7 +106,9 @@ export default function Home() {
         {/* LEFT SIDEBAR */}
         <aside>
           <motion.div initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.1 }} style={{ marginBottom:20 }}>
-            <EventForm refresh={fetchEvents} />
+{role === "ADMIN" && (
+  <EventForm refresh={fetchEvents} />
+)}
           </motion.div>
 
           {/* Category list */}

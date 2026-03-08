@@ -21,22 +21,31 @@ export default function EventForm({ refresh }) {
 
   const set = (key, val) => setForm(f => ({ ...f, [key]: val }))
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    if (!form.title.trim() || !form.date) return
-    setLoading(true)
-    try {
-      await addEvent(form)
-      setSuccess(true)
-      setForm(EMPTY)
-      refresh()
-      setTimeout(() => { setSuccess(false); setOpen(false) }, 1600)
-    } catch (err) {
-      console.error(err)
-    } finally {
-      setLoading(false)
-    }
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  if (!form.title.trim() || !form.date) return
+
+  setLoading(true)
+
+  try {
+
+    await addEvent(form)
+
+    setSuccess(true)
+    setForm(EMPTY)
+    refresh()
+
+    setTimeout(() => {
+      setSuccess(false)
+      setOpen(false)
+    }, 1600)
+
+  } catch (err) {
+    console.error(err)
+  } finally {
+    setLoading(false)
   }
+}
 
   const selectedCat = CATEGORIES.find(c => c.value === form.category)
 
